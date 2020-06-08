@@ -484,15 +484,7 @@ student* editstud(student* allstudents, int* pn)
 	FILE* students;
 	char* str = (char*)malloc(N * sizeof(char));
 	int count = 0, enemy, action;
-	students = fopen("students.csv", "w+");
-	if (students == 0)
-	{
-		printf("\nОшибка открытия файла");
-		logging("", "EditStudent", 0);
-		deleteconsole();
-		free(str);
-		return allstudents;
-	}
+	
 	printf("Введите номер зачетной книги студента, информацию о котором необходимо изменить: ");
 	scanstr(str);
 	if (str[6] != '\0' || str[0] > '9' || str[0] < '0' || str[1] < 'А' || str[1]>'Я' || str[2]>'9' || str[2] < '0' || str[3]>'9' || str[4] < '0' || str[4]>'9' || str[5] < '0' || str[5]>'9')
@@ -585,6 +577,15 @@ student* editstud(student* allstudents, int* pn)
 		return allstudents;
 		break;
 	}
+	}
+	students = fopen("students.csv", "w+");
+	if (students == 0)
+	{
+		printf("\nОшибка открытия файла");
+		logging("", "EditStudent", 0);
+		deleteconsole();
+		free(str);
+		return allstudents;
 	}
 
 	for (int i = 0; i < (*pn); ++i)
